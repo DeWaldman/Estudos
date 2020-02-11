@@ -1,0 +1,59 @@
+#!/bin/python3
+
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+
+def login(username, userpasswd):
+  cr.get('https://www.hackthissite.org/')
+  nemt = cr.find_element_by_name('username')
+  nemt.clear()
+  nemt.send_keys(username)
+  pemt = cr.find_element_by_name('password')
+  pemt.clear()
+  pemt.send_keys(userpasswd)
+  pemt.send_keys(Keys.ENTER)
+
+
+def prog12string():
+  cr.get('https://www.hackthissite.org/missions/prog/12/')
+  html_hts = cr.page_source
+  ln = html_hts.find('<input type="text" value="')+26
+  return html_hts[ln: ln+640]
+
+
+def done(resu):
+  asw = cr.find_element_by_name('solution')
+  asw.send_keys(resu)
+  asw.send_keys(Keys.ENTER)
+  
+
+def solve(ur_string):
+  primos = []; compostos = [];
+  str25 = ''; novastr = ''
+  scom = spri = mult = 0
+  for item in ur_string:
+    pr = True
+    if not item.isnumeric() and len(str25) < 25: str25 += item
+    elif item.isnumeric() and item == '2': primos.append(item)
+    elif item.isnumeric() and int(item)>2:
+      for cont in range(2, int(item)):
+        if int(item) % cont == 0:compostos.append(item); pr = False;break
+      if pr: primos.append(item)
+  for i in primos: spri += int(i)
+  for i in compostos: scom += int(i)
+  mult = spri * scom
+  for l in str25: novastr += chr(ord(l)+1)
+  return novastr+str(mult)
+
+#---------------------------------------------------------------
+
+try:
+  u = input('username: ')
+  p = input('password: ')
+  cr = webdriver.Chrome()
+  login(u, p)
+  done(solve(prog12string()))
+finally:
+  input('Aperte Enter Para Fechar o Navegador')	
+  cr.close()
+
