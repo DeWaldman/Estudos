@@ -1,7 +1,10 @@
 #include <stdio.h>
 #include <math.h>
+#include<stdlib.h>
 
 int isprime(int n);
+
+
 int isprime(int n){
   unsigned int cont;
   if(n==2) return 1;
@@ -14,17 +17,21 @@ int isprime(int n){
   return 1;
 }
 
-int main() {
+
+
+int main(int argc, char *argv[]) {
   int n,a, cont;
-  scanf("%d", &a); // quantidade de entradas
-  for(cont=0;cont<a;cont++){
-    scanf("%d", &n); // entrada
-    
+  if(argc == 1){
+      printf("Sintaxe correta: Soma param1 param2 ...");
+      exit(1);
+  }
+  for(cont=1;cont<argc;cont++){
+    int n = atoi(argv[cont]);
     if(!isprime(n))
-      printf("Not Prime\n");
+      printf("%d Is Not Prime\n", n);
   
     else
-      printf("Prime\n");
+      printf("%d Is Prime\n", n);
   
   }
 }
