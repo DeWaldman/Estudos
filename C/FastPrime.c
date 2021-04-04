@@ -16,9 +16,9 @@ int isprime(int n){
 
 int main() {
   int n,a, cont;
-  scanf("%d", &a);
+  scanf("%d", &a); // quantidade de entradas
   for(cont=0;cont<a;cont++){
-    scanf("%d", &n);
+    scanf("%d", &n); // entrada
     
     if(!isprime(n))
       printf("Not Prime\n");
