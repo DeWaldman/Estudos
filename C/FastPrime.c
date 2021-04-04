@@ -22,7 +22,7 @@ int isprime(int n){
 int main(int argc, char *argv[]) {
   int n,a, cont;
   if(argc == 1){
-      printf("Sintaxe correta: Soma param1 param2 ...");
+      printf("Sintaxe correta: %s [n1] [n2] ...", argv[0]);
       exit(1);
   }
   for(cont=1;cont<argc;cont++){
